@@ -2,6 +2,10 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
 
+JSON data API: https://dummyjson.com/products
+
+![CRUD](Screen.png)
+
 ## Development server
 
 To start a local development server, run:

@@ -4,7 +4,7 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 JSON data from: https://dummyjson.com/products
 
-![Project logo](Screen.png)
+![CRUD](Screenshot.png)
 
 ## Development server
 

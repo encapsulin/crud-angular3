@@ -1,1 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+.card-hover:hover {
+    background-color: silver;
+    cursor: pointer;
+}
+
+.active-card {
+    background-color: silver;
+    /* Bootstrap primary blue, for example */
+    font-weight: bold;
+}

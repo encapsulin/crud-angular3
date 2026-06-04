@@ -1,0 +1,16 @@
+<div class="card">
+    <div class="card-header">
+        <b>{{selectedGroupId()}}</b>
+    </div>
+    <div class="card-body ">
+
+        <div class="row row-cols-1 row-cols-md-2">
+            @for (item of items(); track item.id) {
+            <app-compitem [item]="item"></app-compitem>
+            } @empty {
+            <p>Nothing found.</p>
+            }
+            </div>
+ 
+    </div>
+</div>

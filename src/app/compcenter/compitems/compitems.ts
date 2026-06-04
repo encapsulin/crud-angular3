@@ -56,7 +56,7 @@ export class Compitems implements OnInit {
   }
 
   fetchItemsForGroup(id: string) {
-    console.log(`Fetching items for group: ${id}`);
+    console.log(`Compitems.fetchItemsForGroup(${id})`);
      // Fetch data from DummyJSON
     this.http.get<DummyJsonResponse>('https://dummyjson.com/products/category/'+id)
       .subscribe({

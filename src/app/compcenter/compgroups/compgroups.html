@@ -3,7 +3,8 @@
     <div class="card-body">
         <ul>
             @for (group of groups(); track group.id) {
-            <li (click)="handleClick(group.id)"
+            <li 
+            (click)="handleClick(group.id)"
             class="card-hover"
             [class.active-card]="group.id === activeGroupId()"
             >{{ group.name }} </li>

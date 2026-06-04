@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { Compgroups } from './compgroups/compgroups';
 import { Compitems } from './compitems/compitems';
+import { ActivatedRoute } from '@angular/router';
   
 @Component({
   selector: 'app-compcenter',
@@ -8,12 +9,16 @@ import { Compitems } from './compitems/compitems';
   templateUrl: './compcenter.html',
   styleUrl: './compcenter.css',
 })
-export class Compcenter {
-// Use a signal to hold the active ID (initialized as null or empty string)
-  selectedGroupId = signal<string | null>("tops");
+
+export class Compcenter implements OnInit {
+  groupIdToItems = signal<string | null>('tops');
+
+  ngOnInit() {
+
+  }
 
   handleGroupClickInParent(id: string): void {
-    console.log('Received ID from child component:', id);
-    this.selectedGroupId.set(id); // Update the signal with the new ID
+    console.log('Compcenter.handleGroupClickInParent():', id);
+    this.groupIdToItems.set(id); 
   }
 }

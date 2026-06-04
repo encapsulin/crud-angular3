@@ -1,8 +1,8 @@
 <div class="row">
     <div class="col-md-auto mb-3">
-        <app-compgroups
-        (groupSelected)="handleGroupClickInParent($event)"></app-compgroups>
+        <app-compgroups (groupIdFromGroups)="handleGroupClickInParent($any($event))"></app-compgroups>
     </div>
     <div class="col">
-<app-compitems [selectedGroupId]="selectedGroupId()"></app-compitems>    </div>
+        <app-compitems [selectedGroupId]="groupIdToItems()"></app-compitems>
+    </div>
 </div>

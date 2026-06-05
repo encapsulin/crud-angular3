@@ -11,7 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class Compcenter implements OnInit {
-  groupIdToItems = signal<string | null>('tops');
+  groupIdToChildren = signal<string>('kitchen-accessories');
 
   ngOnInit() {
 
@@ -19,6 +19,6 @@ export class Compcenter implements OnInit {
 
   handleGroupClickInParent(id: string): void {
     console.log('Compcenter.handleGroupClickInParent():', id);
-    this.groupIdToItems.set(id); 
+    this.groupIdToChildren.set(id); 
   }
 }

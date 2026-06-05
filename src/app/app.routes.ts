@@ -3,8 +3,9 @@ import { Routes } from '@angular/router';
 // export const routes: Routes = [];
 
 import { Compgroups } from './compcenter/compgroups/compgroups';
-import { Compcenter } from './compcenter/compcenter';
+import { Compitems } from './compcenter/compitems/compitems';
 
 export const routes: Routes = [
-  { path: 'groups/:groupid', component: Compgroups }
+  { path: 'groups/:id', component: Compgroups },
+  { path: 'items/:id', component: Compitems }
 ];

@@ -2,9 +2,13 @@
     <div class="card-header">
         <b>{{ item().title }}</b>
     </div>
-    <div class="card-body">
-
-        <div>{{ item().description }} </div>
-        <div style="font-weight: bold;">€{{ item().price }} </div>
+    <div class="card-body row">
+            <div class="col-auto">
+                <img [src]="item().thumbnail" [alt]="item().title" class="img-fluid" style="max-width: 120px;" />
+            </div>
+        <div class="col">
+            <div>{{ item().description }} </div>
+            <div style="font-weight: bold;">€{{ item().price }} </div>
+        </div>
     </div>
 </div>

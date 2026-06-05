@@ -1,7 +1,6 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Compgroups } from './compgroups/compgroups';
 import { Compitems } from './compitems/compitems';
-import { ActivatedRoute } from '@angular/router';
   
 @Component({
   selector: 'app-compcenter',

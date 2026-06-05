@@ -1,5 +1,6 @@
 import { Component, inject, input, OnInit, output, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
 interface Group {
@@ -10,7 +11,7 @@ interface Group {
 @Component({
   selector: 'app-compgroups',
   standalone: true, 
-  imports: [],
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './compgroups.html',
   styleUrl: './compgroups.css',
 })
@@ -29,19 +30,7 @@ export class Compgroups implements OnInit {
     // 3. Output emitter
   groupIdToParent = output<string>(); 
 
-  constructor() {
-    console.log('Compgroups.constructor()');
-    const snapshot = this.route.snapshot;
-    console.log({
-      url: snapshot.url, 
-      params: snapshot.params,
-      paramMap: snapshot.paramMap, 
-      queryParams: snapshot.queryParams, 
-      queryParamMap: snapshot.queryParamMap,
-    });
-
-    console.log('groupIdFromParent:', this.groupIdFromParent());
-  }
+  constructor() {}
 
   ngOnInit(): void {
 
@@ -62,6 +51,27 @@ export class Compgroups implements OnInit {
 
     console.log('groupIdFromParent:', this.groupIdFromParent());
     this.activeGroupId.set(this.groupIdFromParent());
+
+    this.route.params.subscribe(params => {
+      console.log("Compgroups1:", params);
+    });
+  
+    this.route.paramMap.subscribe(params => {
+      console.log("Compgroups2:", params);
+    });
+
+    this.route.queryParams.subscribe(params => {
+      console.log("Compgroups3:", params);
+      if (params['id']) {
+        this.activeGroupId.set(params['id']);
+        this.groupIdToParent.emit(params['id']); 
+      }
+    });
+
+    this.route.queryParamMap.subscribe(params => {
+      console.log("Compgroups4:", params);
+    });
+
   }
 
   fetchGroups(): void {
@@ -81,6 +91,9 @@ export class Compgroups implements OnInit {
     console.log('Compgroups.handleClick():', id);
     this.groupIdToParent.emit(id); 
     this.activeGroupId.set(id);
-    this.router.navigate(['/groups', id]);
+    // this.router.navigate(['/groups', id]);
+    this.router.navigate(['/groups'], {
+  queryParams: { id: id }
+});
   }
 }

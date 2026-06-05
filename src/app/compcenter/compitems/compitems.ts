@@ -24,16 +24,23 @@ interface DummyJsonResponse {
 export class Compitems implements OnInit {
 
   ngOnInit(): void {
-    console.log("Compitems.ngOnInit()1:", this.route.snapshot.paramMap.get('id'));
-    this.route.paramMap.subscribe(params => {
-      console.log("Compitems.ngOnInit()2:", params);
+
+    console.log("Compitems.ngOnInit()");
+
+    this.route.params.subscribe(params => {
+      console.log("Compitems1:", params);
     });
   
-    console.log("Compitems.ngOnInit()3:", this.route.snapshot.queryParams);
+    this.route.paramMap.subscribe(params => {
+      console.log("Compitems2:", params);
+    });
+
     this.route.queryParams.subscribe(params => {
-      console.log("Compitems.ngOnInit()4:", params);
-      console.log(params['id']);
-      console.log(params['name']);
+      console.log("Compitems3:", params);
+    });
+
+    this.route.queryParamMap.subscribe(params => {
+      console.log("Compitems4:", params);
     });
   }
 

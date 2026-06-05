@@ -6,6 +6,6 @@ import { Compgroups } from './compcenter/compgroups/compgroups';
 import { Compitems } from './compcenter/compitems/compitems';
 
 export const routes: Routes = [
-  { path: 'groups/:id', component: Compgroups },
+  { path: 'groups', component: Compgroups },
   { path: 'items/:id', component: Compitems }
 ];

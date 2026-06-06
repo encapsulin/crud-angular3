@@ -6,6 +6,7 @@ JSON data from: https://dummyjson.com/products
 <br>
 CSS from Bootstrap: https://getbootstrap.com/docs/5.3/layout/grid/
 
+<hr>
 Live demo: https://demo.encaps.click/angular/crud3/
 
 ![CRUD](Screenshot.png)

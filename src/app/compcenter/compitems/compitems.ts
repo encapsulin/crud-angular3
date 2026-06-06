@@ -27,21 +27,6 @@ export class Compitems implements OnInit {
 
     console.log("Compitems.ngOnInit()");
 
-    this.route.params.subscribe(params => {
-      console.log("Compitems1:", params);
-    });
-  
-    this.route.paramMap.subscribe(params => {
-      console.log("Compitems2:", params);
-    });
-
-    this.route.queryParams.subscribe(params => {
-      console.log("Compitems3:", params);
-    });
-
-    this.route.queryParamMap.subscribe(params => {
-      console.log("Compitems4:", params);
-    });
   }
 
     // Use a signal to hold the groups array for optimized rendering

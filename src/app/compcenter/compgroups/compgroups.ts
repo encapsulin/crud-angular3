@@ -1,5 +1,7 @@
+import { Component, inject, input, OnInit, output, signal } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Component, inject, OnInit, output, signal } from '@angular/core';
 
 interface Group {
   id: string;
@@ -8,47 +10,60 @@ interface Group {
 
 @Component({
   selector: 'app-compgroups',
-  imports: [],
+  standalone: true, 
+  imports: [RouterLink, RouterOutlet],
   templateUrl: './compgroups.html',
   styleUrl: './compgroups.css',
 })
 
 export class Compgroups implements OnInit {
-  // Inject HttpClient using modern inject() function
+
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
 
-  // Use a signal to hold the groups array for optimized rendering
+    // 2. State management via Signals
   groups = signal<Group[]>([]);
+  groupIdFromParent = input<string>('');
+  activeGroupId = signal<string>('');
+
+    // 3. Output emitter
+  groupIdToParent = output<string>(); 
+
+  constructor() {}
 
   ngOnInit(): void {
-    // Fetch data from DummyJSON
+
+    console.log('Compgroups.ngOnInit()');
+
+    this.fetchGroups();
+
+    console.log(this.router.url);
+
+    console.log('groupIdFromParent:', this.groupIdFromParent());
+    this.activeGroupId.set(this.groupIdFromParent());
+
+  }
+
+  fetchGroups(): void {
+    console.log('Compgroups.fetchGroups()');
+
     this.http.get<string[]>('https://dummyjson.com/products/category-list')
       .subscribe({
         next: (categories) => {
-          // Map the string array into the { id, name } structure you need
-          const formattedGroups = categories.map(category => ({
-            id: category,
-            name: category
-          }));
-          
-          // Update the signal value
+          const formattedGroups = categories.map(cat => ({ id: cat, name: cat }));
           this.groups.set(formattedGroups);
         },
-        error: (err) => {
-          console.error('Failed to fetch categories:', err);
-        }
+        error: (err) => console.error('Failed to fetch:', err)
       });
-  }
-
-  // Define the output emitter (Using modern Angular output signal syntax)
-  groupSelected = output<string>(); 
+    }
 
   handleClick(id: string): void {
-    this.groupSelected.emit(id); // Send the ID to the parent
-    console.log('Selected group ID:', id); // Log the selected ID for debugging
-  this.activeGroupId.set(id);
+    console.log('Compgroups.handleClick():', id);
+    this.groupIdToParent.emit(id); 
+    this.activeGroupId.set(id);
+    
+    this.router.navigate(['/groups', id]);
+    // this.router.navigate(['/groups'], {queryParams: { id: id }});
   }
-
-  // 1. Add a local signal to track the active ID, starting with your default 'tops'
-  activeGroupId = signal<string>('tops');
 }

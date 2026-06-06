@@ -1,11 +1,14 @@
+body {
+    background-color: rgb(240, 240, 240);
+}
 /* You can add global styles to this file, and also import other style files */
 .card-hover:hover {
-    background-color: silver;
+    background-color: rgb(235, 235, 235);
     cursor: pointer;
 }
 
 .active-card {
-    background-color: silver;
+    background-color: rgb(236, 236, 236);
     /* Bootstrap primary blue, for example */
     font-weight: bold;
 }

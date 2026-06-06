@@ -4,7 +4,7 @@ Powered by [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
 JSON data from: https://dummyjson.com/products
 CSS from Bootstrap: https://getbootstrap.com/docs/5.3/layout/grid/
 
-Live demo: https://demo.encaps.click/crudangular/
+Live demo: https://demo.encaps.click/angular/crud3/
 
 ![CRUD](Screenshot.png)
 

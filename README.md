@@ -1,7 +1,9 @@
 # CRUD
 
 Powered by [Angular CLI](https://github.com/angular/angular-cli) version 20.3.8.
+<br>
 JSON data from: https://dummyjson.com/products
+<br>
 CSS from Bootstrap: https://getbootstrap.com/docs/5.3/layout/grid/
 
 Live demo: https://demo.encaps.click/angular/crud3/

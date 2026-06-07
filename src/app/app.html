@@ -1,5 +1,12 @@
 <div class="container">
   <app-comptop></app-comptop>
-  <app-compcenter></app-compcenter>
-  <!-- <router-outlet/> -->
+  <div class="row">
+    <div class="col-md-auto mb-3">
+      <app-compleft handleActionInParent="handleActionInParent"></app-compleft>
+    </div>
+    <div class="col">
+      <!-- <router-outlet /> -->
+      <app-compcenter></app-compcenter>
+    </div>
+  </div>
 </div>

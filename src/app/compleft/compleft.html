@@ -1,0 +1,9 @@
+<div class="row">
+  <app-compgroups
+    (groupIdToParent)="handleGroupClickInParent($any($event))"
+    [groupIdFromParent]="groupIdToChildren()"
+  ></app-compgroups>
+</div>
+<div class="row">
+  <app-stats></app-stats>
+</div>

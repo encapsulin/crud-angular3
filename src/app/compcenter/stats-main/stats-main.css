@@ -2,5 +2,6 @@
     border: 1px solid #ccc;
     background-color: rgb(241, 241, 241);
     height: 1rem;
-    margin-bottom: 1rem;
+
+    align-items: center;
 }

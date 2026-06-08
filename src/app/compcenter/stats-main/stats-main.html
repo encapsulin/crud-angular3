@@ -6,13 +6,11 @@
     <table width="100%">
       @for (group of groups(); track group.id) {
         <tr>
-          <td>
-            <div align="right">{{ group.name }}</div>
+          <td style="vertical-align: middle">
+            <div align="right" style="white-space: nowrap">{{ group.name }}</div>
           </td>
-          <td width="100%">
-            <div class="bar" [style.width.%]="group.width">
-              <span>&nbsp;</span>
-            </div>
+          <td width="100%" style="vertical-align: middle">
+            <div class="bar" [style.width.%]="group.width"></div>
           </td>
         </tr>
       } @empty {

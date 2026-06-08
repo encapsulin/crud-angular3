@@ -2,16 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component, effect, inject, input, OnInit, signal } from '@angular/core';
 import { Compitem } from './compitem/compitem';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from './Product.interface';
+import { Product, Products } from './Product.interface';
 import { GlobalStateService } from '../../misc/global-state-service';
-import { Subscription } from 'rxjs';
-
-interface DummyJsonResponse {
-  products: Product[];
-  total: number;
-  skip: number;
-  limit: number;
-}
+import { ProductService } from './product-service';
 
 @Component({
   selector: 'app-compitems',
@@ -21,6 +14,7 @@ interface DummyJsonResponse {
 })
 export class Compitems implements OnInit {
   protected globalStateService = inject(GlobalStateService);
+  productService = inject(ProductService);
 
   constructor(private route: ActivatedRoute) {
     effect(() => {
@@ -38,16 +32,6 @@ export class Compitems implements OnInit {
         this.fetchItemsForGroup(id);
         this.selectedGroupId.set(id);
       }
-
-      ////////////
-      // id = this.selectedGroupIdFromParent();
-
-      // console.log('Compitems received new group ID from parent:', id);
-
-      // this.selectedGroupId.set(id);
-      // if (id) {
-      //   this.fetchItemsForGroup(id);
-      // }
     });
   }
 
@@ -65,21 +49,11 @@ export class Compitems implements OnInit {
   // Inject HttpClient using modern inject() function
   private http = inject(HttpClient);
 
-  fetchItemsForGroup(id: string) {
-    console.log(`Compitems.fetchItemsForGroup(${id})`);
-    // Fetch data from DummyJSON
-    this.http.get<DummyJsonResponse>('https://dummyjson.com/products/category/' + id).subscribe({
+  fetchItemsForGroup(groupId: string) {
+    console.log(`Compitems.fetchItemsForGroup(${groupId})`);
+    this.productService.fetchItemsForGroup(groupId).subscribe({
       next: (result) => {
-        const formattedItems = result['products'].map((item) => ({
-          id: item.id,
-          title: item.title,
-          description: item.description,
-          price: item.price,
-          thumbnail: item.thumbnail,
-        }));
-
-        // Update the signal value
-        this.items.set(formattedItems);
+        this.items.set(result.products);
       },
       error: (err) => {
         console.error('Failed to fetch:', err);

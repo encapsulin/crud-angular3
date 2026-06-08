@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Compitems } from './compitems/compitems';
+import { Compitems } from './products/compitems';
 import { ActivatedRoute } from '@angular/router';
 import { StatsMain } from './stats-main/stats-main';
 import { GlobalStateService } from '../misc/global-state-service';

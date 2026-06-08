@@ -3,15 +3,21 @@
     <b>Stats</b>
   </div>
   <div class="card-body">
-    @for (group of groups(); track group.id) {
-      <div class="mb-2">
-        <div class="bar" [style.width.%]="group.value">
-          <span>{{ group.name }}</span>
-          <span>{{ group.value }}</span>
-        </div>
-      </div>
-    } @empty {
-      <div>Loading...</div>
-    }
+    <table width="100%">
+      @for (group of groups(); track group.id) {
+        <tr>
+          <td>
+            <div align="right">{{ group.name }}</div>
+          </td>
+          <td width="100%">
+            <div class="bar" [style.width.%]="group.width">
+              <span>&nbsp;</span>
+            </div>
+          </td>
+        </tr>
+      } @empty {
+        <div>Loading...</div>
+      }
+    </table>
   </div>
 </div>

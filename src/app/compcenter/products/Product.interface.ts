@@ -7,3 +7,10 @@ export interface Product {
   thumbnail: string;
   [key: string]: any;
 }
+
+export interface Products {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+}

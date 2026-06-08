@@ -2,6 +2,7 @@ import { Component, inject, input, OnInit, output, signal } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { GlobalStateService } from '../../misc/global-state-service';
 
 interface Group {
   id: string;
@@ -10,30 +11,29 @@ interface Group {
 
 @Component({
   selector: 'app-compgroups',
-  standalone: true, 
-  imports: [RouterLink, RouterOutlet],
+  standalone: true,
+  imports: [],
   templateUrl: './compgroups.html',
   styleUrl: './compgroups.css',
 })
-
 export class Compgroups implements OnInit {
-
   private router = inject(Router);
   private route = inject(ActivatedRoute);
   private http = inject(HttpClient);
 
-    // 2. State management via Signals
+  // 2. State management via Signals
   groups = signal<Group[]>([]);
   groupIdFromParent = input<string>('');
   activeGroupId = signal<string>('');
 
-    // 3. Output emitter
-  groupIdToParent = output<string>(); 
+  // 3. Output emitter
+  groupIdToParent = output<string>();
 
   constructor() {}
 
-  ngOnInit(): void {
+  protected globalState = inject(GlobalStateService);
 
+  ngOnInit(): void {
     console.log('Compgroups.ngOnInit()');
 
     this.fetchGroups();
@@ -42,28 +42,28 @@ export class Compgroups implements OnInit {
 
     console.log('groupIdFromParent:', this.groupIdFromParent());
     this.activeGroupId.set(this.groupIdFromParent());
-
   }
 
   fetchGroups(): void {
     console.log('Compgroups.fetchGroups()');
 
-    this.http.get<string[]>('https://dummyjson.com/products/category-list')
-      .subscribe({
-        next: (categories) => {
-          const formattedGroups = categories.map(cat => ({ id: cat, name: cat }));
-          this.groups.set(formattedGroups);
-        },
-        error: (err) => console.error('Failed to fetch:', err)
-      });
-    }
+    this.http.get<string[]>('https://dummyjson.com/products/category-list').subscribe({
+      next: (categories) => {
+        const formattedGroups = categories.map((cat) => ({ id: cat, name: cat }));
+        this.groups.set(formattedGroups);
+      },
+      error: (err) => console.error('Failed to fetch:', err),
+    });
+  }
 
   handleClick(id: string): void {
     console.log('Compgroups.handleClick():', id);
-    this.groupIdToParent.emit(id); 
+    this.groupIdToParent.emit(id);
     this.activeGroupId.set(id);
-    
+
     this.router.navigate(['/groups', id]);
     // this.router.navigate(['/groups'], {queryParams: { id: id }});
+
+    this.globalState.toggleAction('/groups/' + id);
   }
 }

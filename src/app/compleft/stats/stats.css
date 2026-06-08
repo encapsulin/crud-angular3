@@ -1,6 +1,6 @@
 .bar {
-    border: 1px solid rgb(44, 44, 165);
-    background-color: lightblue;
+    border: 1px solid #ccc;
+    background-color: rgb(241, 241, 241);
     height: 1rem;
     margin-bottom: 1rem;
     }

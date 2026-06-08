@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { Compitems } from './compitems/compitems';
 import { ActivatedRoute } from '@angular/router';
 import { StatsMain } from './stats-main/stats-main';
+import { GlobalStateService } from '../misc/global-state-service';
 
 @Component({
   selector: 'app-compcenter',
@@ -14,4 +15,6 @@ export class Compcenter implements OnInit {
   private route = inject(ActivatedRoute);
 
   groupIdToChildren = signal<string>('kitchen-accessories');
+
+  protected globalState = inject(GlobalStateService);
 }

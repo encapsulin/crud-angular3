@@ -3,7 +3,7 @@
     @if (globalState.action().startsWith('/stats')) {
       <app-stats-main></app-stats-main>
     } @else {
-      <app-compitems [selectedGroupId]="groupIdToChildren()"> </app-compitems>
+      <app-compitems [selectedGroupIdFromParent]="groupIdToChildren()"> </app-compitems>
     }
   </div>
 </div>

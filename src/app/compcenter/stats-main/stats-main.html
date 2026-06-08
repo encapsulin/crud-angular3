@@ -3,8 +3,15 @@
     <b>Stats</b>
   </div>
   <div class="card-body">
-    <p>This is the main stats page.</p>
-    <p>It can display various statistics and charts related to the competition center.</p>
-    <p>Use the navigation links to view specific stats pages.</p>
+    @for (group of groups(); track group.id) {
+      <div class="mb-2">
+        <div class="bar" [style.width.%]="group.value">
+          <span>{{ group.name }}</span>
+          <span>{{ group.value }}</span>
+        </div>
+      </div>
+    } @empty {
+      <div>Loading...</div>
+    }
   </div>
 </div>

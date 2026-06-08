@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+interface GroupStats {
+  id: string;
+  name: string;
+  value: number;
+}
 
 @Component({
   selector: 'app-stats-main',
@@ -7,16 +15,28 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './stats-main.css',
 })
 export class StatsMain implements OnInit {
+  private http = inject(HttpClient);
+
   ngOnInit(): void {
     console.log('StatsMain.ngOnInit()');
-    let groups: string[] = fetchGroups('https://dummyjson.com/products/category-list');
-    for (let group of groups) {
-      console.log('Group: ' + group);
-    }
+
+    this.fetchGroups('https://dummyjson.com/products/category-list').subscribe((categories) => {
+      const groups: GroupStats[] = categories.map((category) => ({
+        id: category,
+        name: category,
+        value: Math.floor(Math.random() * 100) + 1,
+      }));
+
+      console.log(groups);
+      this.groups.set(groups);
+    });
   }
-}
-function fetchGroups(arg0: string): string[] {
-  console.log('fetchGroups()');
-  // Simulate fetching groups from an API
-  return ['Group A', 'Group B', 'Group C'];
+
+  groups = signal<GroupStats[]>([]);
+  fetchGroups(url: string): Observable<string[]> {
+    return this.http.get<string[]>(url);
+  }
+  fetchItems(url: string): Observable<string[]> {
+    return this.http.get<string[]>(url);
+  }
 }
